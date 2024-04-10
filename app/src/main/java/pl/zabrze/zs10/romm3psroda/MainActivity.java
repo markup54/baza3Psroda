@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
     TodoDatabase todoDB;
     List<Todo> todoList = new ArrayList<>();
+    ArrayAdapter<Todo> arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        wypiszWszystkoZbazy();
+
 
     }
 
@@ -65,7 +70,13 @@ public class MainActivity extends AppCompatActivity {
                        handler.post(new Runnable() {
                            @Override
                            public void run() {
-                             //TODO: aktulizować adapter do listView
+                               ListView listView = findViewById(R.id.listView);
+                               arrayAdapter = new ArrayAdapter<>(
+                                       getApplicationContext(),
+                                       android.R.layout.simple_list_item_1,
+                                       todoList
+                               );
+                               listView.setAdapter(arrayAdapter);
                            }
                        });
                     }

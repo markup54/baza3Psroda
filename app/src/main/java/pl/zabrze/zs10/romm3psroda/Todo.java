@@ -38,4 +38,9 @@ public class Todo {
     public void setZrobione(Boolean zrobione) {
         this.zrobione = zrobione;
     }
+
+    @Override
+    public String toString() {
+        return nazwa;
+    }
 }
